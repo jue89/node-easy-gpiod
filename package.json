@@ -1,0 +1,20 @@
+{
+  "name": "easy-gpiod",
+  "version": "0.0.0",
+  "description": "Bindings to Linux libgpiod V2.0 with a simple interface",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "libgpiod",
+    "gpio"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jue89/node-easy-gpiod.git"
+  },
+  "author": "Jue <me@jue.yt>",
+  "license": "MIT",
+  "dependencies": {}
+}
