@@ -221,4 +221,27 @@ function openGpioChip (path) {
 	return chip;
 }
 
-module.exports = {openGpioChip, Input, Output};
+function assertLinesGetInputOnClose (chip_path, pin) {
+	let chip = openGpioChip(chip_path);
+	if (typeof pin === 'string') {
+		pin = chip.lines.findIndex(({name}) => name === pin);
+		assert(pin >= 0);
+	}
+
+	assert(!chip.lines[pin].flags.used, `Line ${pin} is in use!`);
+	assert(chip.lines[pin].flags.input, `Line ${pin} is not an input!`);
+
+	// Make line output
+	chip.requestLines('output-test', {out: Output(pin)});
+
+	// Close chip
+	chip.close();
+
+	// Reopen chip
+	chip = openGpioChip(chip_path);
+
+	// Check input state
+	assert(chip.lines[pin].flags.input, `Line ${pin} still is output after close!`);
+}
+
+module.exports = {openGpioChip, Input, Output, assertLinesGetInputOnClose};

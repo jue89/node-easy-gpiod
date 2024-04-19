@@ -12,6 +12,9 @@
     "release:major": "standard-version --release-as major",
     "prepare": "husky install"
   },
+  "bin": {
+    "check-fallback": "check-fallback.js"
+  },
   "keywords": [
     "libgpiod",
     "gpio"
