@@ -3,7 +3,7 @@ const fs = require('fs');
 const ll = require('./build/Release/gpiod_ll.node');
 const EventEmitter = require('events');
 
-function setBit(obj, key, no, val = true) {
+function setBit (obj, key, no, val = true) {
 	obj[key] = obj[key] || 0;
 	if (val) obj[key] = (obj[key] | (1 << no)) >>> 0;
 }
@@ -40,7 +40,7 @@ function Input (pin, cfg = {}) {
 		rising_edge: !!cfg.rising_edge,
 		falling_edge: !!cfg.falling_edge,
 		debounce: cfg.debounce,
-	}
+	};
 }
 
 function drive (drive) {
@@ -57,7 +57,7 @@ function Output (pin, cfg = {}) {
 		active_low: !!cfg.active_low,
 		drive: drive(cfg.drive),
 		value: cfg.value,
-	}
+	};
 }
 
 function openGpioChip (path) {
@@ -66,7 +66,7 @@ function openGpioChip (path) {
 	let info;
 	let lines;
 
-	class GpioChip {	
+	class GpioChip {
 		constructor () {
 			this.requests = [];
 		}
@@ -132,7 +132,7 @@ function openGpioChip (path) {
 			const {fd, release} = ll.RequestLines(chip_fd, consumer, offsets, attrSet.attrs, edgeEvent);
 
 			const self = this;
-			class Request extends EventEmitter{
+			class Request extends EventEmitter {
 				constructor (lines) {
 					super();
 					this.lines = lines;
@@ -186,7 +186,7 @@ function openGpioChip (path) {
 				return [name, line];
 			})));
 
-			function edgeEvent({offset, rising_edge}) {
+			function edgeEvent ({offset, rising_edge}) {
 				const line = Object.values(req.line).find((l) => l.offset === offset);
 				line.emit('change', rising_edge);
 				req.emit('change', line, rising_edge);

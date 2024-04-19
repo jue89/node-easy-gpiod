@@ -23,6 +23,6 @@ const {led, btn} = chip.requestLines('blinky', {
 
 btn.on('change', () => {
     // Toggle LED when the button is pressed
-    led.value = !led.value
+    led.value = !led.value;
 });
 ```
