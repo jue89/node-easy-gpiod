@@ -8,8 +8,11 @@ const {openGpioChip, Input, Output} = require('easy-gpiod');
 const chip = openGpioChip('/dev/gpiochip0');
 
 const {led, btn} = chip.requestLines('blinky', {
-    // Use the 20th line as output and init with LED turned off
-    led: Output(20, { value: false }),
+    // Use the 20th line as output
+    led: Output(20, {
+        value: false,         // Make sure to start with the LED turned off
+        final_value: false,   // Turn off on exit to workaround gpio chips retaining output mode
+    }),
 
     // Use the line with the name "GPIO21" as button input.
     // The button pulls the line to GND when pressed.

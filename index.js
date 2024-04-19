@@ -57,6 +57,7 @@ function Output (pin, cfg = {}) {
 		active_low: !!cfg.active_low,
 		drive: drive(cfg.drive),
 		value: cfg.value,
+		final_value: cfg.final_value,
 	};
 }
 
@@ -139,6 +140,14 @@ function openGpioChip (path) {
 				}
 
 				close () {
+					if (this.closed) return;
+					this.closed = true;
+
+					Object.values(this.lines).forEach((l) => {
+						if (l.final_value !== undefined) {
+							l.value = l.final_value;
+						}
+					});
 					self.requests = self.requests.filter((r) => r !== this);
 					release();
 				}
@@ -168,6 +177,7 @@ function openGpioChip (path) {
 			class OutputLine extends Line {
 				constructor (info) {
 					super(info);
+					this.final_value = info.final_value;
 				}
 
 				get value () {
@@ -197,12 +207,18 @@ function openGpioChip (path) {
 		}
 
 		close () {
+			if (this.closed) return;
+			this.closed = true;
+
 			this.requests.forEach((req) => req.close());
 			fs.close(chip_fd);
 		}
 	}
 
-	return new GpioChip();
+	const chip = new GpioChip();
+	process.on('exit', () => chip.close());
+
+	return chip;
 }
 
 module.exports = {openGpioChip, Input, Output};
