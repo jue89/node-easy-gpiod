@@ -5,7 +5,7 @@ const chip = openGpioChip('/dev/gpiochip0');
 const {led, btn} = chip.requestLines('blinky', {
 	// Use the 20th line as output
 	led: Output(20, {
-		value: false,         // Make sure to start with the LED turned off
+		initial_value: false, // Make sure to start with the LED turned off
 		final_value: false,   // Turn off on exit to workaround gpio chips retaining output mode
 	}),
 

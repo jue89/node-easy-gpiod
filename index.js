@@ -56,7 +56,7 @@ function Output (pin, cfg = {}) {
 		pin,
 		active_low: !!cfg.active_low,
 		drive: drive(cfg.drive),
-		value: cfg.value,
+		initial_value: cfg.initial_value,
 		final_value: cfg.final_value,
 	};
 }
@@ -105,10 +105,10 @@ function openGpioChip (path) {
 				assert(l.offset >= 0 && l.offset < this.info.line_cnt, `Invalid line number: ${l.offset}`);
 
 				if (l.output) {
-					if (l.value !== undefined) {
+					if (l.initial_value !== undefined) {
 						attrSet.update({type: 2}, (x) => {
 							setBit(x, 'mask', n);
-							setBit(x, 'values', n, l.value);
+							setBit(x, 'values', n, l.initial_value);
 						});
 					}
 
