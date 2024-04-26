@@ -197,7 +197,7 @@ function openGpioChip (path) {
 			})));
 
 			function edgeEvent ({offset, rising_edge}) {
-				const line = Object.values(req.line).find((l) => l.offset === offset);
+				const line = Object.values(req.lines).find((l) => l.offset === offset);
 				line.emit('change', rising_edge);
 				req.emit('change', line, rising_edge);
 			}
