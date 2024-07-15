@@ -1,6 +1,6 @@
 {
   "name": "easy-gpiod",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Bindings to Linux libgpiod V2.0 with a simple interface",
   "main": "index.js",
   "scripts": {

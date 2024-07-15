@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.1](https://github.com/jue89/node-easy-gpiod/compare/v0.1.0...v0.1.1) (2024-07-15)
+
+
+### Bug Fixes
+
+* change event ([7ae2c31](https://github.com/jue89/node-easy-gpiod/commit/7ae2c31d2c10a18a6019f710a7fd6d93631d28e0)), closes [#6](https://github.com/jue89/node-easy-gpiod/issues/6)
+
 ## [0.1.0](https://github.com/jue89/node-easy-gpiod/compare/v0.0.0...v0.1.0) (2024-04-25)
 
 
